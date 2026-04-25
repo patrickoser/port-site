@@ -91,3 +91,42 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     window.scrollTo({ top, behavior: 'smooth' });
   });
 });
+
+/* =============================================
+   COPY-TO-CLIPBOARD — for any [data-copy] button
+   ============================================= */
+function copyText(text) {
+  if (navigator.clipboard && window.isSecureContext) {
+    return navigator.clipboard.writeText(text);
+  }
+  return new Promise((resolve, reject) => {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    try {
+      document.execCommand('copy') ? resolve() : reject();
+    } catch (e) { reject(e); }
+    document.body.removeChild(ta);
+  });
+}
+
+document.querySelectorAll('.copy-btn').forEach(btn => {
+  btn.addEventListener('click', async () => {
+    const label = btn.querySelector('.copy-label');
+    const original = label.textContent;
+    try {
+      await copyText(btn.dataset.copy);
+      label.textContent = 'Copied!';
+      btn.classList.add('copied');
+    } catch {
+      label.textContent = 'Failed';
+    }
+    setTimeout(() => {
+      label.textContent = original;
+      btn.classList.remove('copied');
+    }, 1600);
+  });
+});

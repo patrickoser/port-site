@@ -609,6 +609,48 @@ img { display: block; max-width: 100%; }
 }
 .contact-link:hover { color: var(--gold); }
 .contact-dot { color: var(--text-subtle); }
+.contact-email {
+  margin-top: 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: .65rem;
+  padding: .5rem .5rem .5rem 1rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+}
+.contact-email-value {
+  font-size: .875rem;
+  color: var(--text-muted);
+  user-select: all;
+}
+.copy-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  padding: .4rem .7rem;
+  background: rgba(212, 168, 67, 0.08);
+  border: 1px solid rgba(212, 168, 67, 0.35);
+  border-radius: 6px;
+  color: var(--gold);
+  font-family: inherit;
+  font-size: .75rem;
+  font-weight: 500;
+  line-height: 1;
+  cursor: pointer;
+  transition: background var(--transition), border-color var(--transition), transform var(--transition);
+}
+.copy-btn * { cursor: pointer; }
+.copy-btn:hover {
+  background: rgba(212, 168, 67, 0.18);
+  border-color: var(--gold);
+}
+.copy-btn:active { transform: translateY(1px); }
+.copy-btn.copied {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: #1a1a1a;
+}
 .contact-location {
   display: flex;
   align-items: center;
